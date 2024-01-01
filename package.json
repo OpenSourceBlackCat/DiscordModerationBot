@@ -1,0 +1,28 @@
+{
+  "name": "discordmoderationbot",
+  "version": "1.0.0",
+  "description": "Discord Moderation Bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm start"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/OpenSourceBlackCat/DiscordModerationBot.git"
+  },
+  "keywords": [
+    "discord",
+    "BOT",
+    "nodejs"
+  ],
+  "author": "Ameya Gurjar",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/OpenSourceBlackCat/DiscordModerationBot/issues"
+  },
+  "homepage": "https://github.com/OpenSourceBlackCat/DiscordModerationBot#readme",
+  "dependencies": {
+    "discord.js": "^14.14.1",
+    "dotenv": "^16.3.1"
+  }
+}
