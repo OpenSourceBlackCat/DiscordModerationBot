@@ -16,7 +16,7 @@ const configParser = (configFolder) =>{
 const allConfigData = configParser("Configs");
 WelcomeBot(DiscordBot, allConfigData.Welcome);
 DiscordBot.on("ready", ()=>{
-    console.log("Meow");
+    console.log("Discord Moderator Bot Is Running Successfully.");
 });
 DiscordBot.on("messageCreate", async(ctx)=>{
     if(!ctx.author.bot){
