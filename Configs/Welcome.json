@@ -1,7 +1,8 @@
 {
     "WelcomeChannel": "1191508951146180618",
     "WelcomeTitle": "Welcome To Meow Meow",
-    "WelcomeDescription": "Hello Welcome To THEsERVER",
+    "WelcomeDescription": "Hello Welcome To The Server",
+    "WelcomeColor": "#ff0000",
     "WelcomeImage": "https://github.com/OpenSourceBlackCat/DiscordModerationBot/blob/building/Images/WelcomeImage.gif?raw=true",
     "WelcomeServerIcon": "https://github.com/OpenSourceBlackCat/DiscordModerationBot/blob/building/Images/WelcomeServerIcon.png?raw=true"
 }
