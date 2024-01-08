@@ -1,11 +1,12 @@
 require("dotenv").config();
 const fs = require("fs");
 const path = require("path");
-const {Client, Events, GatewayIntentBits} = require("discord.js");
+const {Client, Events, GatewayIntentBits, REST, Routes} = require("discord.js");
 const WelcomeBot = require("./DiscordBot/Welcome.js");
 const SpamHandler = require("./DiscordBot/SpamHandler.js");
 const RoleSelector = require("./DiscordBot/RoleSelector.js");
-const DiscordBot = new Client({intents: [GatewayIntentBits.Guilds, GatewayIntentBits.MessageContent, GatewayIntentBits.GuildMessages, GatewayIntentBits.GuildMembers]});
+const DiscordBot = new Client({intents: Object.keys(GatewayIntentBits)});
+const REST_API = new REST().setToken(process.env.TOKEN);
 const configParser = (configFolder) =>{
     const allConfigJson = {};
     var configFolderPath = path.join(__dirname, configFolder);
@@ -16,13 +17,15 @@ const configParser = (configFolder) =>{
     return allConfigJson;
 }
 const allConfigData = configParser("Configs");
-WelcomeBot(DiscordBot, allConfigData.WelcomeBot);
+const WelcomeBotObject = WelcomeBot(DiscordBot, allConfigData.WelcomeBot);
 console.log("WelcomeBot Loaded.")
-RoleSelector(DiscordBot, allConfigData.RoleSelector);
+const RoleSelectorObject = RoleSelector(DiscordBot, allConfigData.RoleSelector);
 console.log("[WIP] RoleSelector Loaded.");
-SpamHandler(DiscordBot, allConfigData.SpamHandler);
+const SpamHandlerObject = SpamHandler(DiscordBot, allConfigData.SpamHandler);
 console.log("[WIP] SpamHandler Loaded.")
-DiscordBot.on(Events.ClientReady, ()=>{
+
+DiscordBot.on(Events.ClientReady, async()=>{
+    await REST_API.put(Routes.applicationCommands(process.env.BOT_CLIENT, process.env.GUILD), {body: await RoleSelectorObject});
     console.log("Discord Moderator Bot Is Running Successfully.");
 });
 DiscordBot.login(process.env.TOKEN);
