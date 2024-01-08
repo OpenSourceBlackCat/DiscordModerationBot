@@ -1,6 +1,6 @@
-const {EmbedBuilder} = require("discord.js");
+const {EmbedBuilder, Events} = require("discord.js");
 module.exports = WelcomeBot = async(DiscordBot, Config) =>{
-    DiscordBot.on("guildMemberAdd", async(ctx) =>{
+    DiscordBot.on(Events.GuildMemberAdd, async(ctx) =>{
         const welcomeEmbed = new EmbedBuilder()
         .setTitle(Config.WelcomeTitle)
         .setDescription(Config.WelcomeDescription)
