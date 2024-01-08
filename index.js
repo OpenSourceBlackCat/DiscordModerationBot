@@ -1,7 +1,7 @@
 require("dotenv").config();
 const fs = require("fs");
 const path = require("path");
-const {Client, Events, GatewayIntentBits, REST, Routes} = require("discord.js");
+const {Client, Events, GatewayIntentBits, REST, Routes, ActivityType} = require("discord.js");
 const WelcomeBot = require("./DiscordBot/Welcome.js");
 const SpamHandler = require("./DiscordBot/SpamHandler.js");
 const RoleSelector = require("./DiscordBot/RoleSelector.js");
@@ -26,6 +26,7 @@ console.log("[WIP] SpamHandler Loaded.")
 
 DiscordBot.on(Events.ClientReady, async()=>{
     await REST_API.put(Routes.applicationCommands(process.env.BOT_CLIENT, process.env.GUILD), {body: await RoleSelectorObject});
+    await DiscordBot.user.setPresence({status: "dnd", activities:[{name:"OpenSourceBlackCat", type:ActivityType.Listening}]})
     console.log("Discord Moderator Bot Is Running Successfully.");
 });
 DiscordBot.login(process.env.TOKEN);
