@@ -5,6 +5,7 @@ const {Client, Events, GatewayIntentBits, REST, Routes, ActivityType} = require(
 const WelcomeBot = require("./DiscordBot/Welcome.js");
 const SpamHandler = require("./DiscordBot/SpamHandler.js");
 const RoleSelector = require("./DiscordBot/RoleSelector.js");
+const PrivateChannel = require("./DiscordBot/PrivateChannel.js");
 const DiscordBot = new Client({intents: Object.keys(GatewayIntentBits)});
 const REST_API = new REST().setToken(process.env.TOKEN);
 const configParser = (configFolder) =>{
@@ -23,6 +24,8 @@ const RoleSelectorObject = RoleSelector(DiscordBot, allConfigData.RoleSelector);
 console.log("[WIP] RoleSelector Loaded.");
 const SpamHandlerObject = SpamHandler(DiscordBot, allConfigData.SpamHandler);
 console.log("[WIP] SpamHandler Loaded.")
+const PrivateChannelObject = PrivateChannel(DiscordBot, allConfigData.PrivateChannel);
+console.log("[WIP] PrivateChannel Loaded.");
 
 DiscordBot.on(Events.ClientReady, async()=>{
     await REST_API.put(Routes.applicationCommands(process.env.BOT_CLIENT, process.env.GUILD), {body: await RoleSelectorObject});
